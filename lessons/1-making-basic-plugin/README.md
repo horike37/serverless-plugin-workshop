@@ -125,13 +125,7 @@ class ServerlessPlugin {
 ```
 
 ## Step1. ここまでで解説したServerless Welcomeプラグインを作ってみましょう
-- `serverless create -t aws-nodejs -p sls-plugin　&&　cd sls-plugin`で開発用のプロジェクトを作成します。
-- `mkdir .serverless_plugins && cd .serverless_plugins`で`.serverless_plugins`というディレクトリを作るとその中にあるファイルがプラグインとして認識してくれます。
-- `touch sls-plugin.js`でファイルを作り、上記の内容をファイルに配置してみてください。
-- serverless.ymlに以下を追加して完成です
-```
-plugins:
-  - sls-plugin
-```
+`sls-plugin`配下がプラグイン開発用のServerlessプロジェクトです。`.serverless_plugins`配下のsls-plugin.jsを編集してserverless welcomeコマンドを動かしてみてください
+
 
 プロジェクトのルートディレクトリに戻って、`serverless --help`で`serverless welcome`が表示されていれば正しく動いています。そして、`serverless welcome --message hello`で動作確認をしてみましょう
