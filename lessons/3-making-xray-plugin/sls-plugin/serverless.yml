@@ -8,5 +8,8 @@ functions:
   hello:
     handler: handler.hello
 
+custom:
+  trace: true
+
 plugins:
   - serverless-x-ray

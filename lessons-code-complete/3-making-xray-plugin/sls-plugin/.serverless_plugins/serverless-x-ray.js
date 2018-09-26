@@ -16,6 +16,9 @@ class ServerlessXRay {
   }
 
   traceConfig() {
+    if (!this.serverless.service.custom || this.serverless.service.custom.trace !== true) {
+      return;
+    }
     this.serverless.service.getAllFunctions().forEach((functionName) => {
       const functionLogicalId = this.provider.naming.getLambdaLogicalId(functionName);
       this.serverless.service.provider.compiledCloudFormationTemplate
