@@ -1,0 +1,61 @@
+service: sls-plugins-2
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  environment:
+    users_table: users-${self:custom.stage}
+
+functions:
+  get:
+    handler: handler.getUsers
+
+  post:
+    handler: handler.createUser
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+
+plugins:
+  - serverless-download
+
+# you can add CloudFormation resource templates here
+resources:
+  Resources:
+    UsersDynamoDB:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "Name"
+            AttributeType: "S"
+          -
+            AttributeName: "EmailAddress"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "Name"
+            KeyType: "HASH"
+          -
+            AttributeName: "EmailAddress"
+            KeyType: "RANGE"
+        ProvisionedThroughput:
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"
+        TableName: "users-${self:custom.stage}"
+    DynamoDBIamPolicy:
+      Type: AWS::IAM::Policy
+      DependsOn: UsersDynamoDB
+      Properties:
+        PolicyName: lambda-dynamodb
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - dynamodb:Scan
+                - dynamodb:UpdateItem
+              Resource: "arn:aws:dynamodb:*:*:table/users-${self:custom.stage}"
+        Roles:
+          - Ref: IamRoleLambdaExecution
