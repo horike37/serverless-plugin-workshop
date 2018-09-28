@@ -14,3 +14,6 @@ custom:
 - Lambdaにx-rayを使用するためのポリシーを追加するのを忘れずに
 - `after:package:compileFunctions`イベントにて生成済みのCloudFomationのJSONが`serverless.service.provider.compiledCloudFormationTemplate.Resources`で取得できます
 - serverless.ymlのcustomセクションは`serverless.service.custom`で取得できます
+
+### 動作確認
+- `sls deploy`後に`sls invoke -f hello`を実行してマネジメントコンソールからx-rayにデータが存在しているか確認してください
