@@ -129,3 +129,9 @@ class ServerlessPlugin {
 
 
 プロジェクトのルートディレクトリに戻って、`serverless --help`で`serverless welcome`が表示されていれば正しく動いています。そして、`serverless welcome --message hello`で動作確認をしてみましょう
+
+追加sls-plugin.jsの最後に以下を追加してください
+
+```
+module.exports = ServerlessPlugin;
+```
