@@ -14,4 +14,4 @@ custom:
 - Lambdaにx-rayを使用するためのポリシーを追加するのを忘れずに
 - `after:package:compileFunctions`イベントにて生成済みのCloudFomationのJSONが`serverless.service.provider.compiledCloudFormationTemplate
   .Resources`で取得できます
-- serverless.tmlのcustomセクションは`serverless.service.custom`で取得できます
+- serverless.mlのcustomセクションは`serverless.service.custom`で取得できます
